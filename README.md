@@ -1,3 +1,3 @@
-# Movie App 2021
+# Django & React Study
 
-React JS Fundamentals Course
+React JS, Django
