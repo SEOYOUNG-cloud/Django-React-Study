@@ -1,0 +1,6 @@
+{% load static %} <!--정적경로를 사용한다고 알림-->
+<h2>{{name}}</h2>
+<div>{{description}}</div>
+<p>{{price}}원</p>
+<img src={% get_static_prefix %}{{img_path}} />
+<!-- 중첩해서  이걸 넣을 수 없으므로 get_static_prefix를 사용해야함-->
