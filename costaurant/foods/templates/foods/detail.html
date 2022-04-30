@@ -1,6 +1,19 @@
 {% load static %} <!--정적경로를 사용한다고 알림-->
-<h2>{{name}}</h2>
-<div>{{description}}</div>
-<p>{{price}}원</p>
-<img src={% get_static_prefix %}{{img_path}} />
-<!-- 중첩해서  이걸 넣을 수 없으므로 get_static_prefix를 사용해야함-->
+{% load static %} <!--템플릿 태그 
+    : static에 있는 정적 파일을 현재 이 템플릿 파일에서 사용한다고 알려주는 것-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>코스토랑</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href={% static "foods/css/styles_detail.css"%}>
+    </head>
+    <body>
+        <div class='food-detail'> <!--제공하는 detail css를 적용해 주기 위해 설정하는 class -->
+        <h2>{{menu.name}}</h2>
+        <div>{{menu.description}}</div>
+        <p>{{menu.price}}원</p>
+        <img src={% get_static_prefix %}{{menu.img_path}} />
+        <a href='/foods/menu/'>돌아가기</a>
+    </body>
+</html>

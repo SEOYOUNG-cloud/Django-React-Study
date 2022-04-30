@@ -2,10 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
 from django.http import Http404
+from foods.models import Menu
 
 def index(request):
-    today = datetime.today()
-    context = {'date' : today}
+    context = dict()
+    today = datetime.today().date()
+    menus = Menu.objects.all()
+    context['date'] = today 
+    context['menus'] = menus
     return render(request, 'foods/index.html', context=context)
 # template을 유저에게 보여준다 = Template을 rander한다
 # rander() 함수는 httpResponse를 만들어서 return 해준다.
@@ -16,14 +20,9 @@ HttpResponse 객체로 반환하는 함수입니다.
 필수인자는 request와 template_name
 '''
 
-def food_detail(request, food): # urls에서 넘어온 변수를 food로 받음
+def food_detail(request, pk): # urls에서 넘어온 변수를 food로 받음
     context = dict()
-    if food=='chicken':
-        context['name'] = '코딩에 빠진 닭'
-        context['description'] = '주머니가 가벼워서'
-        context['price'] = 10000
-        context['img_path'] = 'foods/images/chicken.jpg'
-    else:
-        raise Http404('이런 음식은 설정 안했삼') # raise는 파이썬에서 지정한 에러 강제 발생시킴
+    menu = Menu.objects.get(id=pk)
+    context['menu'] = menu
     return render(request, 'foods/detail.html', context=context)
 
